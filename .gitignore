@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv/
+
+# Environment variables
+.env
+
+# ChromaDB local storage
+chroma_db/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VSCode settings (if used)
+.vscode/
+
+# Logs (if any in future)
+*.log
