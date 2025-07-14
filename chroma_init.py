@@ -41,8 +41,8 @@
 from chromadb import PersistentClient
 from chromadb.config import Settings
 from pymongo import MongoClient
-from sentence_transformers import SentenceTransformer
 from dotenv import load_dotenv
+from embed import embed
 import os
 load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI")
@@ -61,15 +61,16 @@ except:
 chroma_collection = chroma.get_or_create_collection("iss_knowledge")
 
 # Embedding model
-model = SentenceTransformer("all-MiniLM-L6-v2")
+# model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Index data
 docs = list(collection.find({}))
 print(f"🔍 Found {len(docs)} knowledge items")
+
 for idx, item in enumerate(docs):
     question = item["question"]
     answer = item["answer"]
-    embedding = model.encode(question).tolist()
+    embedding = embed(question)
     chroma_collection.add(
         documents=[answer],
         metadatas=[{"question": question}],
