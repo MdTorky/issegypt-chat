@@ -11,7 +11,7 @@ app = FastAPI()
 
 chroma = PersistentClient(path="./chroma_db")
 collection = chroma.get_or_create_collection("iss_knowledge")
-model = SentenceTransformer("all-MiniLM-L6-v2")
+model = SentenceTransformer("paraphrase-MiniLM-L3-v2")
 
 @app.post("/query")
 async def query_handler(request: Request):
